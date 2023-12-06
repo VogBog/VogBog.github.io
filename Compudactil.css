@@ -299,6 +299,7 @@ main {
 }
 
 .stuff-main {
+    position: relative;
     background-color: #5e058e0f;
     box-shadow: 0 0 12px 8px #0a002c00;
     transition: background-color 0.3s, box-shadow 0.3s;

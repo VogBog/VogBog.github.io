@@ -3,9 +3,9 @@ const pagePrefab = document.getElementsByClassName("shop-page").item(0);
 const allPages = document.getElementsByClassName("shop-pages").item(0);
 const firstStuff = document.getElementsByClassName("stuff-main").item(0);
 
-const newStuff = (img, title, description) => {
+const newStuff = (img, title, description, cost) => {
     const stuff = {
-        img, title, description
+        img, title, description, cost
     };
     return stuff;
 };
@@ -17,12 +17,11 @@ const min = (a, b) => {
         return b;
 };
 
-const stuff = [newStuff("Images/BigPC.png", "Компьютер", "Мега крутой компьютер"),
-                newStuff("Images/RedPC.jpg", "Другой комп", "Тоже неплох"),
-                newStuff("Images/BigPC.png", "Компьютер", "Мега крутой компьютер"),
-                newStuff("Images/RedPC.jpg", "Другой комп", "Тоже неплох"),
-                newStuff("Images/BigPC.png", "Компьютер", "Мега крутой компьютер"),
-                newStuff("Images/RedPC.jpg", "Другой комп", "Тоже неплох")];
+const stuff = [newStuff("Images/RedPC.jpg", "Сборка Intel Core i9 + RTX 4090", "Intel Core i9-12900KF, NVidia GeForce RTX 4090, 32 GB RAM, SSD 2 TB", "2.150.000 ₽"),
+                newStuff("Images/AlienWareProduct.png", "Монитор AlienWare", "Диагональ 27 '', Разрешение 1440р, Частота 280 Гц, Время отклика 0.1 мс", "100.000 ₽"),
+                newStuff("Images/GamingMouse.png", "HyperX мышь", "Разрешение оптического сенсора 16000 dpi, мега лёгкая", "5.000 ₽"),
+                newStuff("Images/GeForceRTX4090.png", "NVidia GeForce RTX 4090", "Видеокарта, про которую можно ничего не писать, вы и так всё знаете", "1.550.000 ₽"),
+                newStuff("Images/HyperPCBuild.jpeg", "Сборка HyperPC", "Intel Core i9-12900KF, NVidia GeForce RTX 4090, 32 GB RAM, SSD 2 TB, Водяное охлаждение, кастомный дизайн", "2.000.000 ₽")];
 
 const minimumOnOnePage = 4;
 
@@ -34,18 +33,21 @@ for(let i = 0; i < pages; i++) {
         allPages.children.item(i).style.backgroundColor = "#AA0060";
     allPages.children.item(i).textContent = i + 1;
     allPages.children.item(i).onclick = (event) => {
-        while(allStuff.childElementCount > 1)
-            allStuff.removeChild(allStuff.children.item(0));
-        let first = allStuff.children.item(0);
-        first.children.item(0).src = stuff[minimumOnOnePage * i]["img"];
-        first.children.item(1).textContent = stuff[minimumOnOnePage * i]["title"];
-        first.children.item(2).textContent = stuff[minimumOnOnePage * i]["description"];
-        for(let j = 1; j < min(stuff.length - minimumOnOnePage * i, minimumOnOnePage); j++) {
-            let cur = first.cloneNode(true);
-            allStuff.appendChild(cur);
-            cur.children.item(0).src = stuff[minimumOnOnePage * i + j]["img"];
-            cur.children.item(1).textContent = stuff[minimumOnOnePage * i + j]["title"];
-            cur.children.item(2).textContent = stuff[minimumOnOnePage * i + j]["description"];
+        allStuff.innerHTML = "";
+
+        for(let j = 0; j < min(stuff.length - minimumOnOnePage * i, minimumOnOnePage); j++) {
+            allStuff.innerHTML += '<span class="stuff-main">'+
+            '<span class="cost">'+
+                stuff[minimumOnOnePage * i + j]["cost"] +
+            '</span>'+
+            '<img src="' + stuff[minimumOnOnePage * i + j]["img"] + '" alt="RedPC" class="stuff-image">'+
+            '<span class="stuff-name">'+
+                stuff[minimumOnOnePage * i + j]["title"] +
+            '</span>' +
+            '<span class="stuff-description">' +
+                stuff[minimumOnOnePage * i + j]["description"] +
+            '</span>' +
+        '</span>';
         }
 
         for(let j = 0; j < pages; j++) {
@@ -56,14 +58,18 @@ for(let i = 0; i < pages; i++) {
     }
 }
 
-firstStuff.children.item(0).src = stuff[0]["img"];
-firstStuff.children.item(1).textContent = stuff[0]["title"];
-firstStuff.children.item(2).textContent = stuff[0]["description"];
-
-for(let i = 1; i < minimumOnOnePage; i++) {
-    let curStuff = firstStuff.cloneNode(true);
-    allStuff.appendChild(curStuff);
-    curStuff.children.item(0).src = stuff[i]["img"];
-    curStuff.children.item(1).textContent = stuff[i]["title"];
-    curStuff.children.item(2).textContent = stuff[i]["description"];
+allStuff.innerHTML = "";
+for(let i = 0; i < minimumOnOnePage; i++) {
+    allStuff.innerHTML += '<span class="stuff-main">'+
+            '<span class="cost">'+
+                stuff[i]["cost"] +
+            '</span>'+
+            '<img src="' + stuff[i]["img"] + '" alt="RedPC" class="stuff-image">'+
+            '<span class="stuff-name">'+
+                stuff[i]["title"] +
+            '</span>' +
+            '<span class="stuff-description">' +
+                stuff[i]["description"] +
+            '</span>' +
+        '</span>';
 }
