@@ -97,6 +97,8 @@ function resize_all_buttons() {
     }
 }
 
+window.onscroll = () => {}
+
 const scrollView = document.getElementById('image-screen')
 let scrollValue = 0
 scrollView.onscroll = () => {
@@ -105,6 +107,8 @@ scrollView.onscroll = () => {
 }
 
 function resizeBtn(btn, ratio, left, top) {
+    left -= 11
+    top -= 11
     btn.style.left = (left * ratio) - scrollValue + 'px';
     btn.style.top = (top * ratio) + 'px';
     btn.style.width = (85 * ratio) + 'px';
