@@ -79,11 +79,18 @@ body {
     margin-top: 16px;
 }
 
+#description-scroller {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-left: 16px;
+    margin-right: 16px;
+    height: 70%;
+}
+
 #description {
     color: white;
     font-size: 18px;
     font-family: 'Roboto';
-    margin-left: 16px;
     margin-top: 16px;
 }
 

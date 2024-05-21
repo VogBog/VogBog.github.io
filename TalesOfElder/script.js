@@ -30,12 +30,50 @@ function onFileLoad(file) {
         let reader = new FileReader()
         reader.readAsText(file)
         reader.onload = function() {
-            saved_obj = reader.result
-            localStorage.setItem("skill", reader.result)
-            let description = document.getElementById('description')
-            description.innerText = reader.result;
+            json_obj = JSON.parse(reader.result)
+            if(json_obj['header'] == 'Tales of Elder tree data pack') {
+                saved_obj = reader.result
+                localStorage.setItem("skill", reader.result)
+                let description = document.getElementById('description')
+                description.innerText = reader.result;
+            }
         }
     }
+}
+
+function getDataByCode(code, description) {
+    let path = '0'
+    if(code == '090204') {
+        path = 'sirmeros.json'
+    }
+    else {
+        description.innerText = 'Такой шаблон не существует.'
+        return
+    }
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('GET', path, true)
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.onload = function() {
+        if(xhr.status >= 200 && xhr.status < 300) {
+            let data = xhr.responseText
+            if(JSON.parse(data)['header'] != 'Tales of Elder tree data pack') {
+                description.innerText = "Произошла ошибка со стороны разработчика-дебила"
+                return;
+            }
+            if (data != null) {
+                saved_obj = data
+                localStorage.setItem("skill", data)
+                description.innerText = "Шаблон загружен"
+                return;
+            }
+        }
+        description.innerText = "Произошла ошибка " + xhr.status + " Возможно, такой шаблон не найден"
+    }
+    xhr.onerror = function() {
+        description.innerText = "Произошла ошибка: " + xhr.status
+    }
+    xhr.send()
 }
 
 function getDescription(index) {
@@ -44,7 +82,7 @@ function getDescription(index) {
         skill = localStorage.getItem("skill")
     }
     if(skill == null) {
-        const result = 'Нужно загрузить Ваш json файл с Вашими способностями'
+        const result = 'Нужно загрузить Ваш json файл с Вашими способностями или выбрать готовый шаблон'
         setTimeout(() => {
             let description = document.getElementById('description')
             if(description != null) {
@@ -55,6 +93,29 @@ function getDescription(index) {
                     description.innerText = "Загружен файл " + input.files[0].name;
                 }
                 description.appendChild(input)
+
+                let button = document.createElement('button')
+                button.innerText = 'Выбрать готовый'
+                button.onclick = function() {
+                    while(description.childElementCount > 0) {
+                        description.removeChild(description.children.item(0))
+                    }
+                    description.innerText = "Введите код шаблона:";
+                    input = document.createElement('input')
+                    input.type = 'text'
+                    description.appendChild(input)
+                    let okButton = document.createElement('button')
+                    okButton.innerText = "ОК"
+                    okButton.onclick = function() {
+                        data = input.value
+                        while(description.childElementCount > 0) {
+                            description.removeChild(description.children.item(0))
+                        }
+                        getDataByCode(data, description)
+                    }
+                    description.appendChild(okButton)
+                }
+                description.appendChild(button)
             }
         }, 500)
         return result
