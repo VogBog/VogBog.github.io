@@ -103,13 +103,21 @@ function resize_all_buttons() {
     }
 }
 
-window.onscroll = () => {}
+function set_visible_to_all(visible) {
+    for(let i = 0; i < btns.length; i++) {
+        btns[i].style.visibility = visible
+    }
+}
 
 const scrollView = document.getElementById('image-screen')
 let scrollValue = 0
 scrollView.onscroll = () => {
     scrollValue = scrollView.scrollLeft
     resize_all_buttons()
+    set_visible_to_all('hidden')
+}
+scrollView.onscrollend = () => {
+    set_visible_to_all('visible')
 }
 
 function resizeBtn(btn, ratio, left, top) {
