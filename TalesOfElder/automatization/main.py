@@ -12,7 +12,7 @@ with open('text.txt', 'r') as file:
                 if not line: break
                 if "-next-" in line: break
                 if not first_time:
-                    output.write("\\n")
+                    output.write("<br>")
                 output.write(line)
                 first_time = False
             if i == 16:
