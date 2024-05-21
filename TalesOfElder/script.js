@@ -21,6 +21,8 @@ function openInfo(index) {
 
 function deleteData() {
     localStorage.removeItem("skill")
+    saved_obj = null;
+    closeInfo();
 }
 
 function onFileLoad(file) {
@@ -28,7 +30,7 @@ function onFileLoad(file) {
         let reader = new FileReader()
         reader.readAsText(file)
         reader.onload = function() {
-            saved_obj = JSON.parse(reader.result)
+            saved_obj = reader.result
             localStorage.setItem("skill", reader.result)
         }
     }
@@ -149,3 +151,5 @@ createButton(13, 685, 256)
 createButton(14, 646, 50)
 createButton(15, 836, 372)
 createButton(16, 836, 50)
+
+closeInfo()
