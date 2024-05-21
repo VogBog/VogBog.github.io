@@ -1,3 +1,5 @@
+saved_obj = localStorage.getItem("skill")
+
 function openInfo(index) {
     let name = document.getElementById("name")
     let description = document.getElementById('description')
@@ -26,13 +28,17 @@ function onFileLoad(file) {
         let reader = new FileReader()
         reader.readAsText(file)
         reader.onload = function() {
+            saved_obj = JSON.parse(reader.result)
             localStorage.setItem("skill", reader.result)
         }
     }
 }
 
 function getDescription(index) {
-    const skill = localStorage.getItem("skill")
+    let skill = saved_obj
+    if(skill == null) {
+        skill = localStorage.getItem("skill")
+    }
     if(skill == null) {
         const result = 'Нужно загрузить Ваш json файл с Вашими способностями'
         setTimeout(() => {
