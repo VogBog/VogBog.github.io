@@ -46,6 +46,9 @@ function getDataByCode(code, description) {
     if(code == '090204') {
         path = 'sirmeros.json'
     }
+    else if(code == '5209') {
+        path = 'ravia.json'
+    }
     else {
         description.innerText = 'Такой шаблон не существует.'
         return
