@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed&family=Roboto+Flex:opsz,wght@8..144,200;8..144,300;8..144,400&display=swap');
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.circle0 {
+    position: absolute;
+    left: 10vw;
+    top: 25vh;
+    width: 15vw;
+    height: 15vw;
+    background: radial-gradient(#ffffff1d 50%, rgba(85, 43, 67, 0.278) 100%);
+    border-radius: 1000px;
+    filter: blur(2px);
+    backdrop-filter: blur(5px);
+}
+
+.circle1 {
+    position: absolute;
+    left: 80vw;
+    top: 14vh;
+    width: 17vw;
+    height: 17vw;
+    background: radial-gradient(#ffb2f51d 50%, rgba(85, 43, 67, 0.278) 100%);
+    border-radius: 1000px;
+    filter: blur(2px);
+    backdrop-filter: blur(5px);
+}
+
+.circle2 {
+    position: absolute;
+    left: 40vw;
+    top: 45vh;
+    width: 20vw;
+    height: 20vw;
+    background: radial-gradient(#ffaaaa1d 50%, rgba(85, 43, 67, 0.278) 100%);
+    border-radius: 1000px;
+    filter: blur(2px);
+    backdrop-filter: blur(5px);
+}
+
+.circle3 {
+    position: absolute;
+    left: 17vw;
+    top: 57vh;
+    width: 17vw;
+    height: 17vw;
+    background: radial-gradient(#ffffff1d 50%, rgba(85, 43, 67, 0.278) 100%);
+    border-radius: 1000px;
+    filter: blur(2px);
+    backdrop-filter: blur(5px);
+}
+
+.circle4 {
+    position: absolute;
+    left: 76vw;
+    top: 60vh;
+    width: 16vw;
+    height: 16vw;
+    background: radial-gradient(#ffffff1d 50%, rgba(85, 43, 67, 0.278) 100%);
+    border-radius: 1000px;
+    filter: blur(2px);
+    backdrop-filter: blur(5px);
+}
+
+.main-window {
+    position: absolute;
+    width: 40vw;
+    height: 60vh;
+    left: 30vw;
+    top: 15vh;
+    color: white;
+    font-size: 16px;
+    font-family: "Roboto Flex";
+    background-color: #ffffff23;
+    backdrop-filter: blur(10px);
+    border: 1px solid white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.window-field {
+    width: 90%;
+    height: 32px;
+    margin: 15px auto 15px auto;
+    background-color: #ffffff20;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.login-button {
+    color: white;
+    background-color: #AA0060;
+    border: none;
+    border-radius: 5px;
+    font-family: "Roboto Flex";
+    font-size: 36px;
+    padding: 5px 50px 5px 50px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+}
+
+input {
+    color: white;
+    font-family: "Roboto Flex";
+}
+
+@media (max-width: 1250px) {
+    .main-window {
+        width: 50vw;
+        left: 25vw;
+    }
+}
+
+@media (max-width: 800px) {
+    .main-window {
+        width: 70vw;
+        left: 15vw;
+    }
+}
+
+@media (max-width: 500px) {
+    .main-window {
+        width: 80vw;
+        left: 10vw;
+    }
+}

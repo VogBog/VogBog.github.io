@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed&family=Roboto+Flex:opsz,wght@8..144,200;8..144,300;8..144,400&display=swap');
+
+.bucket-container {
+    color: white;
+    font-family: "Roboto Flex";
+    font-size: 16px;
+    margin: 10px 20px 10px 20px;
+    min-height: 70vh;
+}
+
+.bucket-item {
+    margin: 10px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.092);
+    border-radius: 10px;
+    border: solid white 1px;
+    display: grid;
+    grid-template: "bucket-img bucket-title bucket-buttons" 5vh
+                    "bucket-img bucket-description bucket-cost" auto
+                    / 18vw auto auto;
+}
+
+.bucket-title {
+    grid-area: bucket-title;
+    font-size: 22px;
+}
+
+.bucket-description {
+    grid-area: bucket-description;
+    font-size: 16px;
+}
+
+.bucket-cost {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    grid-area: bucket-cost;
+    font-size: 22px;
+    font-style: italic;
+}
+
+.bucket-img {
+    grid-area: bucket-img;
+    width: 15vw;
+    height: 15vw;
+    object-fit: contain;
+}
+
+.bucket-buttons {
+    grid-area: bucket-buttons;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bucket-button {
+    border: solid white 1px;
+    border-radius: 5px;
+    padding: 0;
+    margin: 0;
+    background: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bucket-button-img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 800px) {
+    .bucket-description {
+        font-size: 14px;
+    }
+
+    .bucket-cost {
+        font-size: 18px;
+    }
+
+    .bucket-title {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    .bucket-description {
+        font-size: 12px;
+    }
+
+    .bucket-cost {
+        font-size: 16px;
+    }
+
+    .bucket-title {
+        font-size: 16px;
+    }
+
+    .bucket-button-img {
+        width: 15px;
+        height: 15px;
+    }
+
+    .bucket-button {
+        width: 23px;
+        height: 23px;
+    }
+}
+
+@media (max-width: 400px) {
+    .bucket-item {
+        grid-template: "bucket-img bucket-title" auto
+        "bucket-img bucket-description" auto
+        "bucket-cost bucket-buttons" auto
+        / 20vw auto auto;
+    }
+}
+
+.bucket-total {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.all-cost {
+    color: white;
+    font-size: 24px;
+}
+
+.bucket-total-button {
+    background-color: #AA0060;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 10px #0A002C;
+    color: white;
+    font-size: 24px;
+    padding: 20px 40px;
+}
+
+@media (max-width: 600px) {
+    .bucket-total {
+        flex-direction: column;
+    }
+
+    .all-cost {
+        margin-bottom: 30px;
+    }
+}
