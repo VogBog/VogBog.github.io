@@ -42,7 +42,7 @@ function getDescription(index) {
                 input.type = 'file'
                 input.onchange = () => {
                     onFileLoad(input.files[0])
-                    closeInfo()
+                    description.innerText = input.files[0].name;
                 }
                 description.appendChild(input)
             }
