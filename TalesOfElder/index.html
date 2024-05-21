@@ -7,8 +7,19 @@
     <link rel="stylesheet" href="main_style.css">
 </head>
 <body>
-    <h1>ЖОСКИЙ САЙТ</h1>
+    <div class="horizontal-flex">
+        <div id="image-screen">
+            <div id="after-image-screen">
+                <img src="Images/MainAtlas.jpg" alt="Проверьте подключение к интернету" class="atlas-background">
+            </div>
+        </div>
+        <span id="info-block">
+            <span id="close-info" onclick="closeInfo()">Закрыть</span>
+            <span id="name">Name</span>
+            <span id="description">Description</span>
+            <span id="delete-data" onclick="deleteData()">Удалить</span>
+        </span>
+    </div>
 </body>
-<script src="Compudactil.js"></script>
-<script src="Header.js"></script>
+<script src="script.js"></script>
 </html>
