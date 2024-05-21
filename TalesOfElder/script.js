@@ -32,6 +32,8 @@ function onFileLoad(file) {
         reader.onload = function() {
             saved_obj = reader.result
             localStorage.setItem("skill", reader.result)
+            let description = document.getElementById('description')
+            description.innerText = reader.result;
         }
     }
 }
