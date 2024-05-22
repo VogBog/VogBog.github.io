@@ -144,7 +144,10 @@ const info_block_prefab = document.getElementById('info-block').cloneNode(true)
 const btns = []
 const lefts = []
 const tops = []
-let lastButton = null
+const glow_effect = document.getElementById('glow-effect')
+let glow_left = 0
+let glow_top = 0
+let last_button = null
 
 function createButton(index, left, top) {
     const img_screen = document.getElementById("after-image-screen");
@@ -156,11 +159,16 @@ function createButton(index, left, top) {
     resizeBtn(btn, ratio, left, top)
     btn.onclick = () => {
         openInfo(index)
-        if(lastButton != null) {
-            lastButton.classList.remove('button-choosen')
+        glow_effect.style.visibility = 'visible'
+        glow_left = left - 35
+        glow_top = top - 35
+        glow_effect.style.left = glow_left * ratio - scrollValue + 'px';
+        glow_effect.style.top = glow_top * ratio + 'px';
+        if(last_button != null) {
+            last_button.classList.remove('button-choosen')
         }
-        btn.classList.add('button-choosen')
-        lastButton = btn
+        last_button = btn
+        last_button.classList.add('button-choosen')
     }
     btns.push(btn)
     lefts.push(left)
@@ -172,23 +180,30 @@ function resize_all_buttons() {
     for(let i = 0; i < btns.length; i++) {
         resizeBtn(btns[i], sizes.width / 974, lefts[i], tops[i])
     }
+    resizeBtn(glow_effect, sizes.width / 974, glow_left, glow_top)
 }
 
 function set_visible_to_all(visible) {
     for(let i = 0; i < btns.length; i++) {
         btns[i].style.visibility = visible
     }
+    glow_effect.style.visibility = visible
 }
 
 const scrollView = document.getElementById('image-screen')
 let scrollValue = 0
+let isScrolling = false
 scrollView.onscroll = () => {
     scrollValue = scrollView.scrollLeft
-    resize_all_buttons()
-    set_visible_to_all('hidden')
+    if(!isScrolling) {
+        isScrolling = true
+        set_visible_to_all('hidden')
+    }
 }
 scrollView.onscrollend = () => {
+    isScrolling = false
     set_visible_to_all('visible')
+    resize_all_buttons()
 }
 
 function resizeBtn(btn, ratio, left, top) {

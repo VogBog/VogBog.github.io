@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="main_style.css">
 </head>
 <body>
+    <span id="glow-effect"></span>
     <div class="horizontal-flex">
         <div id="image-screen">
             <div id="after-image-screen">
@@ -14,15 +15,18 @@
             </div>
         </div>
         <span id="info-block">
-            <span id="close-info" onclick="closeInfo()">Закрыть</span>
+            <span class="margin16 all-width-flex">
+                <span class="close-info" onclick="closeInfo()">Закрыть</span>
+                <span class="close-info" onclick="deleteData()">Удалить</span>
+            </span>
             <span id="name">Name</span>
             <span id="description-scroller">
                 <span id="description">Description</span>
             </span>
-            <span id="delete-data" onclick="deleteData()">Удалить</span>
+            <span id="close-data" onclick="closeInfo()">Закрыть</span>
         </span>
     </div>
-    <div class="small-info">dev-test 0.5.2</div>
+    <div class="small-info">dev-test 0.6</div>
 </body>
 <script src="script.js"></script>
 </html>

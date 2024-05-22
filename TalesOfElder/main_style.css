@@ -14,7 +14,7 @@
     height: 100%;
 }
 
-#delete-data {
+#close-data {
     color:white;
     font-family: 'Roboto';
     font-size: 18px;
@@ -50,6 +50,17 @@ body {
     position: relative;
 }
 
+.margin16 {
+    margin-top: 16px;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.all-width-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
 #info-block {
     border: white 1px solid;
     border-radius: 16px;
@@ -61,22 +72,22 @@ body {
     backdrop-filter: blur(5px);
 }
 
-#close-info {
+.close-info {
     color: white;
     font-size: 18px;
     font-family: 'Roboto';
-    margin-left: 16px;
-    margin-top: 16px;
     cursor: pointer;
-    width: 1px;
+    width: auto;
 }
 
 #name {
-    color: white;
-    font-size: 22px;
+    color: #D6E1D0;
+    font-size: 26px;
+    font-weight: 400;
     font-family: 'Roboto';
     margin-left: 16px;
     margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 #description-scroller {
@@ -103,8 +114,25 @@ body {
     cursor: pointer;
 }
 
+#glow-effect {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border: solid #ffcc00;
+    border-width: 15px;
+    width: 70px;
+    height: 70px;
+    border-radius: 100px;
+    filter: blur(20px);
+    visibility: hidden;
+}
+
 .button-choosen {
-    border-color: red;
+    border-color: #ffcc00;
+}
+
+::-webkit-scrollbar {
+    background-color: #00000000;
 }
 
 @media (max-width: 1280px) {
@@ -123,7 +151,7 @@ body {
     }
 
     #name {
-        font-size: 18px;
+        font-size: 22px;
     }
 
     #description {
