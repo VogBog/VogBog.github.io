@@ -14,7 +14,14 @@ function openInfo(index) {
             'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII',
             'XIV', 'XV', 'XVI'
         ]
+        const colors = [
+            '#D6E1D0', '#E4DA89', '#EBD76A', '#ffcc00'
+        ]
+        const index_to_color = [
+            0, 0, 1, 2, 3, 2, 3, 1, 2, 3, 0, 1, 2, 3, 2, 3
+        ]
         name.innerText = rim[index - 1];
+        name.style.color = colors[index_to_color[index - 1]]
         description.innerHTML = getDescription(index)
     }
 }
