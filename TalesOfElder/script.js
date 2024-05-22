@@ -49,6 +49,9 @@ function getDataByCode(code, description) {
     else if(code == '5209') {
         path = 'ravia.json'
     }
+    else if(code == '12345') {
+        path = 'vily.json'
+    }
     else {
         description.innerText = 'Такой шаблон не существует.'
         return
@@ -61,7 +64,7 @@ function getDataByCode(code, description) {
         if(xhr.status >= 200 && xhr.status < 300) {
             let data = xhr.responseText
             if(JSON.parse(data)['header'] != 'Tales of Elder tree data pack') {
-                description.innerText = "Произошла ошибка со стороны разработчика-дебила"
+                description.innerText = "Произошла ошибка со стороны разработчика-дебила, который загрузил не тот файл."
                 return;
             }
             if (data != null) {
