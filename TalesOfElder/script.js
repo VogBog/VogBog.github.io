@@ -1,6 +1,17 @@
 saved_obj = localStorage.getItem("skill")
+studied_skills = JSON.parse(localStorage.getItem("studied_skills"))
+let choosen_skill_index = 0
+
+const skills_relations = {
+    1: 0, 2: 0, 11: 0,
+    3: [2], 8: [1], 12: [11],
+    4: [2,3], 6: [3], 9: [3,8,12], 13: [12], 15: [11, 12],
+    5: [4,6], 7:[6], 10:[9], 14:[13], 16:[13, 15]
+}
 
 function openInfo(index) {
+    choosen_skill_index = index
+    update_glow_effects_on_studied_skills()
     let name = document.getElementById("name")
     let description = document.getElementById('description')
     if(name == null) {
@@ -24,11 +35,132 @@ function openInfo(index) {
         name.style.color = colors[index_to_color[index - 1]]
         description.innerHTML = getDescription(index)
     }
+
+    let studyBtn = document.getElementById('study-or-forgot-btn')
+    const c = canStudyThisSkill(index)
+    if(c == 0) {
+        studyBtn.style.visibility = 'hidden'
+    }
+    else {
+        studyBtn.style.visibility = 'visible'
+    }
+    if(c == 2) {
+        studyBtn.innerText = 'Забыть'
+        if(!studyBtn.classList.contains('remove-study-button')) {
+            studyBtn.classList.add('remove-study-button')
+        }
+    }
+    else {
+        studyBtn.innerText = 'Изучить'
+        if(studyBtn.classList.contains('remove-study-button')) {
+            studyBtn.classList.remove('remove-study-button')
+        }
+    }
+}
+
+function study() {
+    if(canStudyThisSkill(choosen_skill_index) == 1) {
+        if(studied_skills == null || studied_skills.skills == null) {
+            studied_skills = {
+                skills: [ choosen_skill_index ]
+            }
+        }
+        else {
+            studied_skills.skills.push(choosen_skill_index)
+        }
+        localStorage.setItem('studied_skills', JSON.stringify(studied_skills))
+        update_glow_effects_on_studied_skills()
+        openInfo(choosen_skill_index)
+    }
+    else if(canStudyThisSkill(choosen_skill_index) == 2) {
+        let isRemoveSome = true
+        let removed_skills = [choosen_skill_index]
+        while(isRemoveSome) {
+            isRemoveSome = false;
+            for(let i = 0; i < studied_skills.skills.length; i++) {
+                if(removed_skills.includes(studied_skills.skills[i]))
+                    continue
+                const arr = skills_relations[studied_skills.skills[i]]
+                for(let j = 0; j < arr.length; j++) {
+                    if(removed_skills.includes(arr[j])) {
+                        removed_skills.push(studied_skills.skills[i])
+                        isRemoveSome = true;
+                        break;
+                    }
+                }
+            }
+        }
+        let new_arr = []
+        for(let i = 0; i < studied_skills.skills.length; i++) {
+            if(!removed_skills.includes(studied_skills.skills[i])) {
+                new_arr.push(studied_skills[i])
+            }
+        }
+        studied_skills.skills = new_arr
+        localStorage.setItem('studied_skills', JSON.stringify(studied_skills))
+        update_glow_effects_on_studied_skills()
+        closeInfo()
+    }
+}
+
+function update_glow_effects_on_studied_skills() {
+    for(let i = 0; i < btns.length; i++) {
+        let c = canStudyThisSkill(i + 1)
+        let a = btns[i].getElementsByClassName('glow-effect').item(0)
+        a.style.visibility = c == 0 || i + 1 == choosen_skill_index ? 'hidden' : 'visible'
+        if(c == 1) {
+            a.style.background = '#00ffcc7b';
+        }
+        else {
+            a.style.background = '#00ff007b';
+        }
+    }
+}
+
+function clear_skills() {
+    studied_skills = null;
+}
+
+function canStudyThisSkill(index) {
+    if(saved_obj == null)
+        return 0;
+    if(index == 1 || index == 2 || index == 11) {
+        if(studied_skills == null || studied_skills.skills == null || studied_skills.skills.length == 0) {
+            return 1;
+        }
+        else if(studied_skills.skills.includes(index)) {
+            return 2;
+        }
+        else if(studied_skills.skills.includes(1)) {
+            return 1;
+        } 
+        else if(index == 2 && !studied_skills.skills.includes(1) ||
+                index == 11 && !studied_skills.skills.includes(1)) {
+                    return 0;
+                }
+        else {
+            return 1;
+        }
+    }
+    if(studied_skills == null || studied_skills.skills == null || studied_skills.skills.length == 0)
+        return 0;
+    if(studied_skills.skills.includes(index)) {
+        return 2;
+    }
+    let arr = skills_relations[index]
+    for(let i = 0; i < arr.length; i++) {
+        if(studied_skills.skills.includes(arr[i])) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 function deleteData() {
+    choosen_skill_index = 0;
     localStorage.removeItem("skill")
     saved_obj = null;
+    update_glow_effects_on_studied_skills()
     closeInfo();
 }
 
@@ -43,6 +175,7 @@ function onFileLoad(file) {
                 localStorage.setItem("skill", reader.result)
                 let description = document.getElementById('description')
                 description.innerText = reader.result;
+                update_glow_effects_on_studied_skills()
             }
         }
     }
@@ -78,6 +211,7 @@ function getDataByCode(code, description) {
                 saved_obj = data
                 localStorage.setItem("skill", data)
                 description.innerText = "Шаблон загружен"
+                update_glow_effects_on_studied_skills()
                 return;
             }
         }
@@ -160,23 +294,26 @@ function createButton(index, left, top) {
     const img_screen = document.getElementById("after-image-screen");
     const sizes = document.getElementsByClassName("atlas-background").item(0).getBoundingClientRect();
     const btn = document.createElement("span")
+    const glow = document.createElement("span")
+    glow.classList.add('glow-effect')
+    btn.appendChild(glow)
     btn.className = "button-custom"
     img_screen.appendChild(btn)
     const ratio = sizes.width / 974
     resizeBtn(btn, ratio, left, top)
-    btn.onclick = () => {
+    btn.onclick = function() {
         openInfo(index)
         glow_effect.style.visibility = 'visible'
-        glow_left = left - 35
-        glow_top = top - 35
-        glow_effect.style.left = glow_left * ratio - scrollValue + 'px';
-        glow_effect.style.top = glow_top * ratio + 'px';
+        glow_left = left - 25
+        glow_top = top - 25
+        resizeBtn(glow_effect, ratio, glow_left, glow_top)
         if(last_button != null) {
             last_button.classList.remove('button-choosen')
         }
         last_button = btn
         last_button.classList.add('button-choosen')
     }
+
     btns.push(btn)
     lefts.push(left)
     tops.push(top)
@@ -193,8 +330,15 @@ function resize_all_buttons() {
 function set_visible_to_all(visible) {
     for(let i = 0; i < btns.length; i++) {
         btns[i].style.visibility = visible
+        btns[i].getElementsByClassName('glow-effect').item(0).style.visibility = 'hidden'
     }
     glow_effect.style.visibility = visible
+    if(choosen_skill_index == 0) {
+        glow_effect.style.visibility = 'hidden'
+    }
+    if(visible == 'visible') {
+        update_glow_effects_on_studied_skills()
+    }
 }
 
 const scrollView = document.getElementById('image-screen')
@@ -214,10 +358,10 @@ scrollView.onscrollend = () => {
 }
 
 function resizeBtn(btn, ratio, left, top) {
-    left -= 11
-    top -= 11
-    btn.style.left = (left * ratio) - scrollValue + 'px';
-    btn.style.top = (top * ratio) + 'px';
+    const l = left - 11
+    const t = top - 11
+    btn.style.left = (l * ratio) - scrollValue + 'px';
+    btn.style.top = (t * ratio) + 'px';
     btn.style.width = (85 * ratio) + 'px';
     btn.style.height = (80 * ratio) + 'px';
 }
@@ -242,5 +386,6 @@ createButton(13, 685, 256)
 createButton(14, 646, 50)
 createButton(15, 836, 372)
 createButton(16, 836, 50)
+update_glow_effects_on_studied_skills()
 
 closeInfo()

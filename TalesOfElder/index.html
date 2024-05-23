@@ -17,16 +17,19 @@
         <span id="info-block">
             <span class="margin16 all-width-flex">
                 <span class="close-info" onclick="closeInfo()">Закрыть</span>
-                <span class="close-info" onclick="deleteData()">Удалить</span>
+                <span class="close-info red-color" onclick="deleteData()">Удалить</span>
             </span>
             <span id="name">Name</span>
             <span id="description-scroller">
                 <span id="description">Description</span>
             </span>
-            <span id="close-data" onclick="closeInfo()">Закрыть</span>
+            <span class="bottom-footer">
+                <span class="bottom-data study-button" id="study-or-forgot-btn" onclick="study()">Изучить</span>
+                <span class="bottom-data" onclick="closeInfo()">Закрыть</span>
+            </span>
         </span>
     </div>
-    <div class="small-info">dev-test 0.6</div>
+    <div class="small-info">dev-test 0.7</div>
 </body>
 <script src="script.js"></script>
 </html>
