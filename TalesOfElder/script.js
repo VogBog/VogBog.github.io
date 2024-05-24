@@ -200,9 +200,6 @@ function getDataByCode(code, description) {
     else if(code == 'ISSA_tirandakiller007') {
         path = 'issa.json'
     }
-    else if(code == '1234') {
-        path = 'issa.json'
-    }
     else {
         description.innerText = 'Такой шаблон не существует.'
         return
