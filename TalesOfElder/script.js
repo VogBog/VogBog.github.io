@@ -78,22 +78,27 @@ function study() {
         while(isRemoveSome) {
             isRemoveSome = false;
             for(let i = 0; i < studied_skills.skills.length; i++) {
-                if(removed_skills.includes(studied_skills.skills[i]))
+                let firsts = [1, 2, 11]
+                if(removed_skills.includes(studied_skills.skills[i]) || firsts.includes(studied_skills.skills[i]))
                     continue
                 const arr = skills_relations[studied_skills.skills[i]]
+                let isRemoveThis = true
                 for(let j = 0; j < arr.length; j++) {
-                    if(removed_skills.includes(arr[j])) {
-                        removed_skills.push(studied_skills.skills[i])
-                        isRemoveSome = true;
+                    if(!removed_skills.includes(arr[j]) && studied_skills.skills.includes(arr[j])) {
+                        isRemoveThis = false
                         break;
                     }
+                }
+                if(isRemoveThis) {
+                    removed_skills.push(studied_skills.skills[i])
+                    isRemoveSome = true
                 }
             }
         }
         let new_arr = []
         for(let i = 0; i < studied_skills.skills.length; i++) {
             if(!removed_skills.includes(studied_skills.skills[i])) {
-                new_arr.push(studied_skills[i])
+                new_arr.push(studied_skills.skills[i])
             }
         }
         studied_skills.skills = new_arr
