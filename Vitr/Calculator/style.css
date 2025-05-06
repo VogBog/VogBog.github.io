@@ -1,0 +1,118 @@
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #efefef;
+    font-size: 28px;
+}
+.default-text {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #efefef;
+    font-size: 18px;
+}
+
+#first-step {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#second-step {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.first-step div {
+    margin: 12px 6px;
+}
+
+.first-step button {
+    margin: 12px 6px;
+}
+
+.small-button {
+    font-size: 18px;
+}
+
+.warning {
+    border: solid 2px orange;
+    border-radius: 8px;
+    background-color: #ffa60030;
+    padding: 8px 16px;
+    margin: 18px;
+    margin-top: 16px;
+}
+
+#points-container {
+    margin: 16px;
+}
+
+#points {
+    margin: 16px;
+}
+
+#success-points {
+    display: none;
+    color: #efefef;
+    border: solid 2px green;
+    background-color: #1e4d1e64;
+    border-radius: 6px;
+    padding: 8px 16px;
+}
+
+#stats {
+    margin: 16px 16px;
+    padding: 8px;
+    border: solid 1px #efefef;
+    border-radius: 8px;
+}
+
+.stat-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 16px 8px;
+}
+
+.stat-row span {
+    display: flex;
+    align-items: center;
+}
+
+.stat-icon {
+    max-width: 60px;
+}
+
+@media (max-width: 767px) {
+    .stat-icon {
+        max-width: 50px;
+    }
+}
+
+@media (max-width: 400px) {
+    .stat-icon {
+        max-width: 40px;
+    }
+
+    .stat-row {
+        font-size: 14px;
+    }
+}
+
+.stat-row__text {
+    padding-left: 16px;
+}
+
+.stat-row__value {
+    padding-right: 8px;
+    font-size: 26px;
+}
+
+.stat-row__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Калькулятор характеристик для Витрувия</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../main_style.css">
+</head>
+<body>
+    <div class="main-container">
+        <h1>Калькулятор характеристик</h1>
+        <div id="first-step">
+            <div class="white-space"></div>
+            <div class="default-text">Укажите начальное количество очков характеристик</div>
+            <input id="input-points-count" type="number">
+            <button class="small-button" onclick="{tryStartCalculator();}">Начать</button>
+        </div>
+
+        <div id="second-step">
+            <div class="warning">
+                Сайт не сохраняет никаких данных. После использования калькулятора самостоятельно запишите свои данные на другой носитель.
+            </div>
+
+            <div id="points-container">
+                <span id="points">
+                    Количество очков: 0/0
+                </span>
+                <span id="success-points">
+                    Вы распределили все очки!
+                </span>
+            </div>
+            <div id="stats">
+                <div class="stat-row">
+                    <span>
+                        <img class="stat-icon" src="https://optim.tildacdn.com/tild6661-3830-4539-b538-326333393863/-/resize/90x/-/format/webp/photo.png.webp">
+                        <span class="stat-row__text">Самочувствие</span>
+                    </span>
+                    <span>
+                        <span class="stat-row__value">1</span>
+                        <button class="stat-row__button">+</button>
+                        <button class="stat-row__button">-</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>
