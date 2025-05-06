@@ -60,8 +60,6 @@ function tryStartCalculator() {
         firstStep.style.display = "none";
         secondStep.style.display = "flex";
 
-        updatePointsElement();
-
         const statElementOriginal = statsElements[0];
 
         for(let i = 0; i < statsDescriptions.length; i++) {
@@ -82,11 +80,33 @@ function tryStartCalculator() {
         }
 
         statsElements[0].parentNode.removeChild(statsElements[0]);
+
+        updatePointsElement();
     }
 }
 
 function updatePointsElement() {
     pointsElement.innerText = "Количество очков: " + points + "/" + maxPoints;
+
+    for(let i = 0; i < statsDescriptions.length; i++) {
+        const btns = statsElements[i].getElementsByClassName("stat-row__button");
+        const addColor = canAdd(i) ? "#efefef" : "#efefef50";
+        const removeColor = canRemove(i) ? "#efefef" : "#efefef50";
+
+        btns[0].style.borderColor = addColor;
+        btns[0].style.color = addColor;
+
+        btns[1].style.borderColor = removeColor;
+        btns[1].style.color = removeColor;
+    }
+}
+
+function canAdd(index) {
+    return statsCosts[statsDescriptions[index].value + 1] <= points && statsDescriptions[index].value < 6;
+}
+
+function canRemove(index) {
+    return statsDescriptions[index].value > 1;
 }
 
 function addPoint(index) {
