@@ -109,7 +109,7 @@ function addPoint(index) {
 
 function removePoint(index) {
     let curPoints = statsCosts[statsDescriptions[index].value];
-    if(statsDescriptions[index].value == 0)
+    if(statsDescriptions[index].value <= 1)
         return;
 
     points += curPoints;
