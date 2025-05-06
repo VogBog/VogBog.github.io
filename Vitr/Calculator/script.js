@@ -164,7 +164,7 @@ function checkForAddPointsAbility() {
 }
 
 function getAlmostSuccessPhrase() {
-    if(points >= 10) {
+    if(points >= 6) {
         return "Вы решили купить за оставшиеся очки черты. Да ведь?";
     }
     else if(points >= 3) {
