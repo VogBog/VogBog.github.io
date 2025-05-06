@@ -53,8 +53,8 @@ let maxPoints = 60;
 let points = 60;
 
 function tryStartCalculator() {
-    if(inputPointsCount.value > 1) {
-        maxPoints = inputPointsCount.value;
+    if(inputPointsCount.value > 0) {
+        maxPoints = inputPointsCount.value * 6;
         points = maxPoints;
 
         firstStep.style.display = "none";
