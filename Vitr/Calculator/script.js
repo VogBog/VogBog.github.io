@@ -100,6 +100,9 @@ function addPoint(index) {
 
     if(points == 0) {
         successPoints.style.display = "inline";
+        if(screen.width <= 510) {
+            successPoints.style.display = "block";
+        }
     }
     else {
         almostSuccessPoints.style.display = "none";
@@ -132,4 +135,7 @@ function checkForAddPointsAbility() {
             return;
     }
     almostSuccessPoints.style.display = "inline";
+    if(screen.width <= 510) {
+        almostSuccessPoints.style.display = "block";
+    }
 }
