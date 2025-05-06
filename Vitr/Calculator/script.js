@@ -10,32 +10,38 @@ let statsElements = document.getElementsByClassName("stat-row");
 const statsDescriptions = [
     {   "img" : "https://optim.tildacdn.com/tild6661-3830-4539-b538-326333393863/-/resize/90x/-/format/webp/photo.png.webp",
         "name" : "Самочувствие",
-        "value" : 1
+        "value" : 1,
+        "tooltip" : "Способность организма Персонажа сопротивляться физическим и психическим воздействиям."
     },
     {
         "img" : "https://optim.tildacdn.com/tild3333-3231-4563-a433-373934373437/-/resize/90x/-/format/webp/photo.png.webp",
         "name" : "Внимание",
-        "value" : 1
+        "value" : 1,
+        "tooltip" : "Способность Персонажа подмечать скрытое и реагировать на опасность."
     },
     {
         "img" : "https://optim.tildacdn.com/tild6439-3338-4266-b133-323961393531/-/resize/90x/-/format/webp/photo.png.webp",
         "name" : "Движение",
-        "value" : 1
+        "value" : 1,
+        "tooltip" : "Способность Персонажа управлять своим телом."
     },
     {
         "img" : "https://optim.tildacdn.com/tild6236-3064-4439-b037-666133626562/-/resize/90x/-/format/webp/photo.png.webp",
         "name" : "Сражение",
-        "value" : 1
+        "value" : 1,
+        "tooltip" : "Способность Персонажа действовать в бою."
     },
     {
         "img" : "https://optim.tildacdn.com/tild3539-6231-4065-b432-363330383865/-/resize/90x/-/format/webp/photo.png.webp",
         "name" : "Мышление",
-        "value" : 1
+        "value" : 1,
+        "tooltip" : "Способность Персонажа к получению и использованию информации."
     },
     {
         "img" : "https://optim.tildacdn.com/tild3037-3539-4635-a263-393663646432/-/resize/90x/-/format/webp/photo.png.webp",
         "name" : "Общение",
-        "value" : 1
+        "value" : 1,
+        "tooltip" : "Способность Персонажа к взаимодействию с окружающими."
     }
 ];
 
@@ -77,6 +83,8 @@ function tryStartCalculator() {
             statElementCopy.getElementsByClassName("stat-row__button")[1].onclick = function() {
                 removePoint(index);
             }
+
+            statElementCopy.getElementsByClassName("tooltip")[0].innerText = statsDescriptions[i].tooltip;
         }
 
         statsElements[0].parentNode.removeChild(statsElements[0]);
