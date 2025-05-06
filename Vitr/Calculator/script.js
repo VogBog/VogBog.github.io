@@ -154,8 +154,26 @@ function checkForAddPointsAbility() {
         if(points >= curPoints)
             return;
     }
+
+    const phrase = getAlmostSuccessPhrase();
+    almostSuccessPoints.innerText = phrase;
     almostSuccessPoints.style.display = "inline";
-    if(screen.width <= 510) {
+    if(screen.width <= 510 || phrase.length >= 40) {
         almostSuccessPoints.style.display = "block";
+    }
+}
+
+function getAlmostSuccessPhrase() {
+    if(points >= 10) {
+        return "Вы решили купить за оставшиеся очки черты. Да ведь?";
+    }
+    else if(points >= 3) {
+        return "Вы распределяли, как могли! Конечная.";
+    }
+    else if(points == 2) {
+        return "Математичка гордится вами. Почти справились.";
+    }
+    else {
+        return "Вы старались, но обосрались";
     }
 }
