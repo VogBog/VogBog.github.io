@@ -59,6 +59,15 @@ h1 {
     padding: 8px 16px;
 }
 
+#almost-success-points {
+    display: none;
+    color: #efefef;
+    border: solid 2px orange;
+    background-color: #ffa60074;
+    border-radius: 6px;
+    padding: 8px 16px;
+}
+
 #stats {
     margin: 16px 16px;
     padding: 8px;

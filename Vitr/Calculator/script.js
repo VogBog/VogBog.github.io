@@ -3,6 +3,7 @@ const firstStep = document.getElementById("first-step");
 const secondStep = document.getElementById("second-step");
 const pointsElement = document.getElementById("points");
 const successPoints = document.getElementById("success-points");
+const almostSuccessPoints = document.getElementById("almost-success-points");
 
 let statsElements = document.getElementsByClassName("stat-row");
 
@@ -100,6 +101,10 @@ function addPoint(index) {
     if(points == 0) {
         successPoints.style.display = "inline";
     }
+    else {
+        almostSuccessPoints.style.display = "none";
+        checkForAddPointsAbility();
+    }
 }
 
 function removePoint(index) {
@@ -112,9 +117,19 @@ function removePoint(index) {
     updateStatRowElement(index);
 
     successPoints.style.display = "none";
+    almostSuccessPoints.style.display = "none";
 }
 
 function updateStatRowElement(index) {
     statsElements[index].getElementsByClassName("stat-row__value")[0].innerText = statsDescriptions[index].value;
     updatePointsElement();
+}
+
+function checkForAddPointsAbility() {
+    for(let i = 0; i < statsDescriptions.length; i++) {
+        let curPoints = statsCosts[statsDescriptions[i].value + 1];
+        if(points >= curPoints)
+            return;
+    }
+    almostSuccessPoints.style.display = "inline";
 }
